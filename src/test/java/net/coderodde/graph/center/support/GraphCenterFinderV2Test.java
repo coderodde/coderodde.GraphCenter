@@ -7,7 +7,7 @@ import net.coderodde.graph.center.GraphCenterData;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class GraphCenterFinderV1Test {
+public class GraphCenterFinderV2Test {
 
     private final DirectedGraphNode n1 = new DirectedGraphNode(1);
     private final DirectedGraphNode n2 = new DirectedGraphNode(2);
@@ -20,7 +20,7 @@ public class GraphCenterFinderV1Test {
     private final DirectedGraphWeightFunction wf =
               new DirectedGraphWeightFunction();
     
-    private final AbstractGraphCenterFinder finder = new GraphCenterFinderV1();
+    private final AbstractGraphCenterFinder finder = new GraphCenterFinderV2();
     
     private GraphCenterData data;
     

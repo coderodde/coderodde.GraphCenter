@@ -61,7 +61,7 @@ public class GraphCenterFinderV2 extends AbstractGraphCenterFinder {
         DirectedGraphNodeEccentricityMap eccentricityMap =
                 new DirectedGraphNodeEccentricityMap();
         
-        for (DirectedGraphNode currentNode : connectedComponent) {
+        for (DirectedGraphNode currentNode : finderState.connectedComponent) {
             double currentNodeEccentricity = 
                     finderState.findEccentricityFrom(currentNode, 
                                                      minimumEccentricity);
@@ -104,17 +104,17 @@ public class GraphCenterFinderV2 extends AbstractGraphCenterFinder {
                 if (!CLOSED.contains(child)) {
                     double tentativeDistance = 
                             DISTANCES.get(current) + weight(current, child);
-                    
-                    if (tentativeDistance >= minimumEccentricity) {
-                        return minimumEccentricity;
-                    }
-                    
+                     
                     if (!OPEN.contains(child)) {
                         OPEN.add(child, tentativeDistance);
                         DISTANCES.put(child, tentativeDistance);
                         
                         if (maximumDistance < tentativeDistance) {
                             maximumDistance = tentativeDistance;
+                            
+                            if (maximumDistance > minimumEccentricity) {
+                                return maximumDistance;
+                            }
                         }
                     } else if (DISTANCES.get(child) > tentativeDistance) {
                         DISTANCES.put(child, tentativeDistance);
@@ -122,6 +122,10 @@ public class GraphCenterFinderV2 extends AbstractGraphCenterFinder {
                         
                         if (maximumDistance < tentativeDistance) {
                             maximumDistance = tentativeDistance;
+                            
+                            if (maximumDistance > minimumEccentricity) {
+                                return maximumDistance;
+                            }
                         }
                     }
                 }
